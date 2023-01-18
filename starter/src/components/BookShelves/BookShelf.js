@@ -1,36 +1,36 @@
-import ShelfChangerDropdown from "../../BookShelfChanger/ShelfChangerDropdown"
+import PropTypes from "prop-types";
+import Book from "./Book";
 
-
-const BookShelf = ({shelf}) => {
-    return(
-        <div>
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">{shelf.name}</h2>
-                <div className="bookshelf-books">
-                  <ol className="books-grid">
-                    <li>
-                      <div className="book">
-                        <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{
-                              width: 128,
-                              height: 188,
-                              backgroundImage:
-                                'url("http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api")',
-                            }}
-                          ></div>
-                          <ShelfChangerDropdown />
-                        </div>
-                        <div className="book-title">Ender's Game</div>
-                        <div className="book-authors">Orson Scott Card</div>
-                      </div>
-                    </li>
-                  </ol>
-                </div>
-              </div>
+const BookShelf = ({ shelf, allBooks, updateBookShelf }) => {
+  const filteredBooks = allBooks.filter((book) => {
+    return book.shelf === shelf.value;
+  });
+  return (
+    <div>
+      <div className="bookshelf">
+        <h2 className="bookshelf-title">{shelf.name}</h2>
+        <div className="bookshelf-books">
+          <ol className="books-grid">
+            {filteredBooks.map((book) => {
+              return (
+                <Book
+                  key={book.id}
+                  bookDetail={book.shelf === shelf.value ? book : ""}
+                  updateBookShelf={updateBookShelf}
+                />
+              );
+            })}
+          </ol>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default BookShelf
+export default BookShelf;
+
+BookShelf.propTypes = {
+  allBooks: PropTypes.array.isRequired,
+  shelf: PropTypes.object.isRequired,
+  updateBookShelf: PropTypes.func.isRequired,
+};
