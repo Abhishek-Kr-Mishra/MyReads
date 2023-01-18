@@ -1,6 +1,6 @@
 # MyReads Project
 
-The Goal of this Webaap is to develop a portal where we can display our books according to their respective shelves. We have a dropdown attached to every book, by which we can change our book's shelf type. At last we have a search page where we can search our books as well.
+The Goal of this Webaap is to develop a portal where we can display our books according to their respective shelves. We have a dropdown attached to every book, by which we can change our book's shelf type. We have a search page where we can search our books as well.
 
 To get started deve00loping right away:
 
