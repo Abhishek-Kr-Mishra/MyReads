@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as BookApi from "../../BooksAPI";
 import Book from "../BookShelves/Book";
 import PropTypes from "prop-types";
+import {debounce} from "lodash" 
 
 const SearchPage = ({ allBooks, updateBookShelf }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -59,7 +60,8 @@ const SearchPage = ({ allBooks, updateBookShelf }) => {
       }
     };
 
-    searchBook();
+    const debouncedSave = debounce(() => searchBook(), 500);
+		debouncedSave();
 
     return () => {
       if (isApiAuthorised) {
